@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- Add Permissions here -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
     <application
-        android:label="contacts_integration_app"
+        android:label="Contacts"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
