@@ -150,13 +150,31 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   const SizedBox(height: 10),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "My Contacts",
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            color: colorBlack,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "My Contacts",
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: colorBlack,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                        ),
+
+                        // Total Length of contacts
+                        Text(
+                          _filteredContacts.length.toString(),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    color: colorBlack,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                  ),
+                        ),
+                      ],
                     ),
                   ),
 
