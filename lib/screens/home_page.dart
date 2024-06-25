@@ -70,22 +70,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: colorPrimary,
-          title: Text(
-            widget.title,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  color: colorWhite,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-          ),
-          centerTitle: false,
-        ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: colorPrimary,
+          backgroundColor: colorOffBlue,
           foregroundColor: colorWhite,
-          // elevation: 0,
           shape: const CircleBorder(),
           onPressed: () {
             Get.to(
@@ -101,102 +88,113 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ),
         ),
         body: _contacts.isEmpty
-            ? Center(child: CircularProgressIndicator())
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: colorDark.withOpacity(0.5)),
-                      ),
-                      child: TextField(
-                        controller: _searchController,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: colorDark, fontSize: 20),
-                        decoration: InputDecoration(
-                          hintText: 'Search',
-                          hintStyle: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: colorDark, fontSize: 14),
-                          border: InputBorder.none,
-                          prefixIcon: Icon(
-                            Icons.search,
-                            size: 18,
-                            color: colorDark,
+            ? const Center(child: CircularProgressIndicator())
+            : CustomScrollView(
+                slivers: [
+                  // Sliver AppBar
+                  SliverAppBar(
+                    title: Text(
+                      widget.title,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: colorWhite,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.clear, color: colorDark, size: 18),
-                            onPressed: () {
-                              _searchController.clear();
-                              _filterContacts();
-                            },
+                    ),
+                    backgroundColor: colorOffBlue,
+                    expandedHeight: 120.0,
+                    floating: true,
+                    pinned: true,
+                    snap: false,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Container(
+                        padding: const EdgeInsets.only(top: 70.0),
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.05),
+                          child: Container(
+                            height: 50,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                              color: colorDark.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: TextField(
+                              controller: _searchController,
+                              decoration: InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(color: colorWhite, fontSize: 18),
+                                border: InputBorder.none,
+                                alignLabelWithHint: true,
+                                prefixIcon: const Icon(
+                                  Icons.search,
+                                  size: 14,
+                                  color: colorWhite,
+                                ),
+                                suffixIcon: IconButton(
+                                  icon: const Icon(Icons.clear,
+                                      color: colorWhite, size: 14),
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    _filterContacts();
+                                  },
+                                ),
+                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: colorWhite, fontSize: 18),
+                              textAlignVertical: TextAlignVertical.center,
+                            ),
                           ),
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                         ),
                       ),
                     ),
                   ),
-
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "My Contacts",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: colorBlack,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                  ),
-                        ),
-
-                        // Total Length of contacts
-                        Text(
-                          _filteredContacts.length.toString(),
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: colorBlack,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                        ),
-                      ],
+                  SliverPadding(
+                    padding: const EdgeInsets.only(
+                        top: 16.0, left: 16.0, right: 16.0),
+                    sliver: SliverToBoxAdapter(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "My Contacts",
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: colorBlack,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                          ),
+                          Text(
+                            "Contacts ${_filteredContacts.length}",
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: colorBlack,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                    ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
 
-                  // Contacts List
-                  Expanded(
-                    child: ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: _filteredContacts.length,
-                      itemBuilder: (context, index) {
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
                         Contact contact = _filteredContacts[index];
                         return ListTile(
                           onTap: () async {
                             String? phoneNumber = contact.phones!.first.value;
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("Phone number: $phoneNumber"),
-                                backgroundColor: colorBlue,
-                              ),
-                            );
                             if (phoneNumber != null) {
                               await _makePhoneCall(phoneNumber);
-                              print("Phone number: $phoneNumber");
                             }
                           },
                           leading: (contact.avatar != null &&
@@ -241,6 +239,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           ),
                         );
                       },
+                      childCount: _filteredContacts.length,
                     ),
                   ),
                 ],

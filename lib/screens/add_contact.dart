@@ -22,7 +22,7 @@ class _AddContactPageState extends State<AddContactPage> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: colorPrimary,
+          backgroundColor: colorOffBlue,
           iconTheme: const IconThemeData(color: colorWhite),
           title: Text(
             "Add Contact",
@@ -39,60 +39,70 @@ class _AddContactPageState extends State<AddContactPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextField(
-                controller: _nameController,
-                decoration: InputDecoration(
-                  labelText: 'Name',
-                  labelStyle: TextStyle(
-                    color: colorPrimary,
-                  ),
-                  enabledBorder: OutlineInputBorder(
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
+                    border: Border.all(color: colorOffBlue, width: 1.2),
+                  ),
+                  child: TextField(
+                    controller: _nameController,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: colorOffBlue, fontSize: 20),
+                    decoration: InputDecoration(
+                      hintText: 'Full Name',
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: colorOffBlue, fontSize: 14),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.05),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: colorPrimary,
-                      width: 2,
-                    ),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 ),
               ),
               SizedBox(height: 16),
-              TextField(
-                controller: _phoneController,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: 'Phone',
-                  labelStyle: TextStyle(
-                    color: colorPrimary,
-                  ),
-                  enabledBorder: OutlineInputBorder(
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
+                child: Container(
+                  height: 50,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade400,
+                    border: Border.all(color: colorOffBlue, width: 1.2),
+                  ),
+                  child: TextField(
+                    controller: _phoneController,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(color: colorOffBlue, fontSize: 20),
+                    decoration: InputDecoration(
+                      hintText: 'Phone',
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: colorOffBlue, fontSize: 14),
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.05),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
-                      color: colorPrimary,
-                      width: 2,
-                    ),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                 ),
               ),
               SizedBox(height: 16),
               Container(
-                alignment: Alignment.centerRight,
                 height: 50.0,
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.05),
                 child: ElevatedButton(
                   onPressed: () async {
                     final String name = _nameController.text.trim();
@@ -137,7 +147,7 @@ class _AddContactPageState extends State<AddContactPage> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: colorPrimary,
+                    backgroundColor: colorOffBlue,
                     foregroundColor: colorWhite,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
